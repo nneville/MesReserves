@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap  PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="product">
+ 
+    <typeAlias alias="PRODUCT" type="com.nneville.bo.Product" />
+ 
+    <resultMap id="productResultMap" class="PRODUCT">
+        <result property="barcode" column="barcode" />
+        <result property="label" column="label" />
+        <result property="quantity" column="quantity" />
+    </resultMap>
+     
+    <select id="getProductById" parameterClass="java.lang.String" resultMap="productResultMap">
+          SELECT * FROM public."Product" WHERE barcode = #value#
+    </select>
+     
+    <insert id="addProduct" parameterClass="PRODUCT">
+        INSERT INTO public."Product" (barcode,label,quantity)
+         VALUES(#barcode#,#label#,#quantity#);
+    </insert>
+     
+</sqlMap>
