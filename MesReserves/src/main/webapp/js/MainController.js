@@ -9,19 +9,14 @@ var app = angular.module('chemin_audit', []);
 var MainController = function($scope, $http, $location) {
 	
 	// declaration des variables
-	$scope.typeArticle = 'S';
-	$scope.formatRapport = 'pdf';
-	$scope.dateAnalyse = '';
+	$scope.article = '';
 	$scope.reference = '3029330003533';
-	
-	$scope.loader = true;
-	$scope.mySelect = { taille : null };
 	
 	
 	$scope.findBarcode = function() {
 		var promise = $http.get("https://fr.openfoodfacts.org/api/v0/produit/" + $scope.reference + ".json");
 		var onSuccess = function(response) {
-			$scope.reponse = response.data;
+			$scope.article = response.data;
 		}
 		var onError = function(reason) {
 			$scope.error = "No result found"; 
